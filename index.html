@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Cauldron</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: rgb(141, 23, 196);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        img {
+            margin: 20px 0;
+        }
+        #questionform {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        #questioninput {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        #submitbutton {
+            padding: 10px 20px;
+            background-color: #1ecc0f;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #bgVideo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <video id="bgVideo" autoplay muted loop playsinline></video>
+        <source src="Users/jordan/Repos/Magic_Eight_Ball/Bats Animation.mp4" type="video/mp4">
+    </video>
+    <header>
+        <h1>Magic Cauldron </h1>
+    </header>
+    <img src="/api/placeholder/200/200" alt="Magic Cauldron Image">
+    <h2>Seek your reply, the Magic Cauldron won’t deny!</h2>
+    <main>
+        <form id="questionForm">
+            <input type="text" id="questionInput" placeholder="Throw in ingredients here" required>
+            <button type="submit" id="submitButton">Cook up an answer!</button>
+        </form>
+    </main>
+</body>
+</html>
