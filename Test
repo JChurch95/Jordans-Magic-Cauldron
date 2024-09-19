@@ -19,6 +19,14 @@
         }
         img {
             margin: 20px 0;
+            transition: transform 1s ease-in-out;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .spinning {
+            animation: spin 1s linear infinite;
         }
         #questionform {
             display: flex;
@@ -59,7 +67,7 @@
     <header>
         <h1>Magic Cauldron</h1>
     </header>
-    <img src="Magic Cauldron.jpg" alt="Magic Cauldron Image" width="200" height="200">
+    <img id="cauldronImage" src="Magic Cauldron.png" alt="Magic Cauldron Image" width="200" height="200">
     <h2>Seek your reply, the Magic Cauldron won't deny!</h2>
     <main>
         <form id="questionForm">
@@ -67,5 +75,18 @@
             <button type="submit" id="submitButton">Cook up an answer!</button>
         </form>
     </main>
+
+    <script>
+        document.getElementById('questionForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form submission
+            var cauldronImage = document.getElementById('cauldronImage');
+            cauldronImage.classList.add('spinning');
+            
+            // Stop spinning after 3 seconds
+            setTimeout(function() {
+                cauldronImage.classList.remove('spinning');
+            }, 3000);
+        });
+    </script>
 </body>
 </html>
