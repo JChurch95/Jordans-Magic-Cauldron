@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var responsePage = document.getElementById('responsePage');
     var responseText = document.getElementById('responseText');
     var returnButton = document.getElementById('returnButton');
+    var cauldronImage = document.getElementById('cauldronImage');
+    var questionInput = document.getElementById('questionInput');
 
     // Magic 8 Ball responses
     var responses = [
@@ -42,17 +44,34 @@ document.addEventListener('DOMContentLoaded', function() {
         toPage.classList.add('active');
     }
 
+    function adjustTextareaHeight(textarea) {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    }
+
+    questionInput.addEventListener('input', function() {
+        adjustTextareaHeight(this);
+    });
+
+    // Adjust height on window resize
+    window.addEventListener('resize', function() {
+        adjustTextareaHeight(questionInput);
+    });
+
+    // Initial adjustment
+    adjustTextareaHeight(questionInput);
+
     questionForm.addEventListener('submit', function(e) {
         e.preventDefault(); // Prevent form submission
-        
-        content.classList.add('rumbling');
+
+        cauldronImage.classList.add('cauldron-rumbling');
         submitButton.disabled = true; // Disable the button during animation
-        
+
         // Show and play the video
         bgVideo.style.display = 'block';
         bgVideo.currentTime = 0; // Reset video to start
         var playPromise = bgVideo.play();
-        
+
         if (playPromise !== undefined) {
             playPromise.then(_ => {
                 // Video playback started successfully
@@ -61,11 +80,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("Video play failed:", error);
             });
         }
-        
+
         // Start playing the looping cauldron sound
         cauldronSound.currentTime = 0; // Reset the audio to the beginning
         var audioPromise = cauldronSound.play();
-        
+
         if (audioPromise !== undefined) {
             audioPromise.then(_ => {
                 // Audio playback started successfully
@@ -74,10 +93,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("Audio play failed:", error);
             });
         }
-        
-        // Stop animation, hide video, and stop sound after 3 seconds
+
+        // Stop animation, hide video, and stop sound after 10.15 seconds
         setTimeout(function() {
-            content.classList.remove('rumbling');
+            cauldronImage.classList.remove('cauldron-rumbling');
             bgVideo.style.display = 'none';
             bgVideo.pause();
             cauldronSound.pause(); // Stop the looping sound
@@ -89,5 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     returnButton.addEventListener('click', function() {
         switchPage(responsePage, questionPage);
+        questionInput.value = ''; // Clear the input
+        adjustTextareaHeight(questionInput); // Reset the height of the textarea
     });
 });

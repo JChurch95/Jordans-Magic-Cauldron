@@ -27,17 +27,31 @@ body, html {
     background-image: 
         linear-gradient(
             to bottom,
-            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 100) 0%,
             rgba(0, 0, 0, 0) 20%,
             rgba(0, 0, 0, 0) 80%,
-            rgba(0, 0, 0, 0.2) 100%
+            rgba(0, 0, 0, 100) 100%
         ),
         linear-gradient(
             to right,
-            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 100) 0%,
             rgba(0, 0, 0, 0) 20%,
             rgba(0, 0, 0, 0) 80%,
-            rgba(0, 0, 0, 0.2) 100%
+            rgba(0, 0, 0, 100) 100%
+        ),
+        linear-gradient(
+            to left,
+            rgba(0, 0, 0, 100) 0%,
+            rgba(0, 0, 0, 0) 20%,
+            rgba(0, 0, 0, 0) 80%,
+            rgba(0, 0, 0, 100) 100%
+        ),
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 100) 0%,
+            rgba(0, 0, 0, 0) 20%,
+            rgba(0, 0, 0, 0) 80%,
+            rgba(0, 0, 0, 100) 100%
         ),
         url('../media/Pumpkins.png');
     background-size: cover, cover, cover;
@@ -76,20 +90,29 @@ body, html {
 
 h1, h2, #submitButton, #returnButton {
     text-shadow: 
-        -1px -1px 0 lime,
-        1px -1px 0 lime,
-        -1px 1px 0 lime,
-        1px 1px 0 lime;
+        /* Lime green glow */
+        2px 2px 4px rgba(0,0,0,0.5),
+        /* Thicker text border */
+        -2px -2px 0 #49ee07,
+        2px -2px 0 #49ee07,
+        -2px 2px 0 #49ee07,
+        2px 2px 0 #49ee07,
+        -3px 0 0 #49ee07,
+        3px 0 0 #49ee07,
+        0 -3px 0 #49ee07,
+        0 3px 0 #49ee07;
 }
 
 h1 {
     font-size: 8vmin;
     margin: 1vh 0;
+    color: rgb(117, 9, 194);
 }
 
 h2 {
     font-size: 5vmin;
     margin: 1vh 0;
+    color: rgb(117, 9, 194);
 }
 
 #cauldronImage {
@@ -106,27 +129,37 @@ h2 {
     width: 100%;
 }
 
+.input-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
 #questionInput {
-    width: 80%;
-    max-width: 300px;
-    padding: 1vh;
-    margin-bottom: 1vh;
+    width: 100%;
+    min-height: 40px;
+    padding: 10px;
+    box-sizing: border-box;
     border: none;
     border-radius: 5px;
     font-family: 'Eater', cursive;
     background-color: rgba(255, 255, 255, 0.8);
     color: rgb(117, 9, 194);
     text-align: center;
-    font-size: 3vmin;
+    font-size: 16px;
+    resize: none;
+    overflow: hidden;
 }
 
 #questionInput::placeholder {
     text-align: center;
+    color: rgba(117, 9, 194, 0.7);
 }
 
 #submitButton, #returnButton {
     padding: 1vh 2vw;
-    background-color: #1ecc0f;
+    background-color: #eb6123;
     color: rgb(117, 9, 194);
     border: none;
     border-radius: 5px;
@@ -136,22 +169,22 @@ h2 {
     margin-top: 1vh;
 }
 
-@keyframes rumbleAndScale {
+@keyframes cauldronRumbleAndScale {
     0% { transform: translate(1px, 1px) rotate(0deg) scale(1); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg) scale(1.02); }
-    20% { transform: translate(-3px, 0px) rotate(1deg) scale(1.04); }
-    30% { transform: translate(3px, 2px) rotate(0deg) scale(1.06); }
-    40% { transform: translate(1px, -1px) rotate(1deg) scale(1.08); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg) scale(1.06); }
-    60% { transform: translate(-3px, 1px) rotate(0deg) scale(1.04); }
-    70% { transform: translate(3px, 1px) rotate(-1deg) scale(1.02); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg) scale(1.05); }
+    20% { transform: translate(-3px, 0px) rotate(1deg) scale(1.1); }
+    30% { transform: translate(3px, 2px) rotate(0deg) scale(1.05); }
+    40% { transform: translate(1px, -1px) rotate(1deg) scale(1); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg) scale(0.95); }
+    60% { transform: translate(-3px, 1px) rotate(0deg) scale(0.9); }
+    70% { transform: translate(3px, 1px) rotate(-1deg) scale(0.95); }
     80% { transform: translate(-1px, -1px) rotate(1deg) scale(1); }
-    90% { transform: translate(1px, 2px) rotate(0deg) scale(0.98); }
+    90% { transform: translate(1px, 2px) rotate(0deg) scale(1.05); }
     100% { transform: translate(1px, -2px) rotate(-1deg) scale(1); }
 }
 
-.rumbling {
-    animation: rumbleAndScale 1.5s ease-in-out infinite;
+.cauldron-rumbling {
+    animation: cauldronRumbleAndScale 1.5s ease-in-out infinite;
 }
 
 .page {
@@ -168,8 +201,19 @@ h2 {
 }
 
 #responseText {
-    font-size: 4.5vmin;
+    font-size: 8vmin;
     margin: 1vh 0;
-    color: lime;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    color: rgb(117, 9, 194);   
+    text-shadow: 
+        /* Lime green glow */
+        2px 2px 4px rgba(0,0,0,0.5),
+        /* Thicker text border */
+        -2px -2px 0 #49ee07,
+        2px -2px 0 #49ee07,
+        -2px 2px 0 #49ee07,
+        2px 2px 0 #49ee07,
+        -3px 0 0 #49ee07,
+        3px 0 0 #49ee07,
+        0 -3px 0 #49ee07,
+        0 3px 0 #49ee07;
 }
