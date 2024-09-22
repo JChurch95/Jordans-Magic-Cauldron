@@ -1,10 +1,11 @@
-/* CSS rules go here */
+/* CSS rules for Jordan's Magic Cauldron */
 body, html {
     height: 100vh;
     margin: 0;
     font-family: 'Eater', cursive;
     color: rgb(117, 9, 194);
     overflow: hidden;
+    cursor: url('../media/Ghost Cursor.png'), auto;
 }
 
 .container {
@@ -13,7 +14,6 @@ body, html {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
@@ -23,35 +23,35 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #000; /* Fallback color */
+    background-color: #000;
     background-image: 
         linear-gradient(
             to bottom,
-            rgba(0, 0, 0, 100) 0%,
+            rgba(0, 0, 0, 1) 0%,
             rgba(0, 0, 0, 0) 20%,
             rgba(0, 0, 0, 0) 80%,
-            rgba(0, 0, 0, 100) 100%
+            rgba(0, 0, 0, 1) 100%
         ),
         linear-gradient(
             to right,
-            rgba(0, 0, 0, 100) 0%,
+            rgba(0, 0, 0, 1) 0%,
             rgba(0, 0, 0, 0) 20%,
             rgba(0, 0, 0, 0) 80%,
-            rgba(0, 0, 0, 100) 100%
+            rgba(0, 0, 0, 1) 100%
         ),
         linear-gradient(
             to left,
-            rgba(0, 0, 0, 100) 0%,
+            rgba(0, 0, 0, 1) 0%,
             rgba(0, 0, 0, 0) 20%,
             rgba(0, 0, 0, 0) 80%,
-            rgba(0, 0, 0, 100) 100%
+            rgba(0, 0, 0, 1) 100%
         ),
         linear-gradient(
             to top,
-            rgba(0, 0, 0, 100) 0%,
+            rgba(0, 0, 0, 1) 0%,
             rgba(0, 0, 0, 0) 20%,
             rgba(0, 0, 0, 0) 80%,
-            rgba(0, 0, 0, 100) 100%
+            rgba(0, 0, 0, 1) 100%
         ),
         url('../media/Pumpkins.png');
     background-size: cover, cover, cover;
@@ -72,27 +72,51 @@ body, html {
     z-index: 2;
 }
 
+header {
+    position: relative;
+    z-index: 1000;
+    text-align: center;
+    padding: 1vh 0;
+    width: 100%;
+}
+
+h1 {
+    font-size: 8vmin;
+    margin: 0 0 1vh 0;
+    color: rgb(117, 9, 194);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 0vh;
+}
+
+.nav-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Adjust this value to control spacing between buttons */
+}
+
 .content {
     position: relative;
     z-index: 3;
     text-align: center;
-    transform-origin: center center;
-    transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    height: 100%;
+    height: calc(100% - 15vh); /* Adjust based on header height */
     width: 100%;
-    padding: 2vh;
+    padding: 0 2vw;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
-h1, h2, #submitButton, #returnButton {
+h1, h2, #submitButton, #returnButton, .nav-button, #contactForm button {
     text-shadow: 
-        /* Lime green glow */
         2px 2px 4px rgba(0,0,0,0.5),
-        /* Thicker text border */
         -2px -2px 0 #49ee07,
         2px -2px 0 #49ee07,
         -2px 2px 0 #49ee07,
@@ -103,23 +127,17 @@ h1, h2, #submitButton, #returnButton {
         0 3px 0 #49ee07;
 }
 
-h1 {
-    font-size: 8vmin;
-    margin: 1vh 0;
-    color: rgb(117, 9, 194);
-}
-
 h2 {
     font-size: 5vmin;
-    margin: 1vh 0;
+    margin: 0.5vh 0;
     color: rgb(117, 9, 194);
 }
 
 #cauldronImage {
-    width: 50vmin;
-    height: auto;
-    margin: 1vh 0;
-    filter: drop-shadow(0 0 2px lime);
+    width: 48vmin;
+    height: center;
+    margin: 0.5vh 0;
+    filter: drop-shadow(0 0 8px lime);
 }
 
 #questionForm {
@@ -127,38 +145,40 @@ h2 {
     flex-direction: column;
     align-items: center;
     width: 100%;
+    max-width: 80vw;
+    margin: 0.5vh auto;
 }
 
 .input-wrapper {
     position: relative;
     width: 100%;
-    max-width: 600px;
+    max-width: 80vw;
     margin: 0 auto;
 }
 
 #questionInput {
-    width: 100%;
-    min-height: 40px;
-    padding: 10px;
+    width: 45%;
+    height: 10vh;
+    padding: 1vh;
     box-sizing: border-box;
-    border: none;
+    border: 1.5px solid #eb6123;
     border-radius: 5px;
     font-family: 'Eater', cursive;
-    background-color: rgba(255, 255, 255, 0.8);
-    color: rgb(117, 9, 194);
+    background-color: rgba(117, 9, 194, 0.5);
+    color: #49ee07;
     text-align: center;
-    font-size: 16px;
+    font-size: 2.5vmin;
     resize: none;
     overflow: hidden;
 }
 
 #questionInput::placeholder {
     text-align: center;
-    color: rgba(117, 9, 194, 0.7);
+    color: #49ee07;
 }
 
-#submitButton, #returnButton {
-    padding: 1vh 2vw;
+#submitButton, #returnButton, .nav-button, #contactForm button {
+    padding: 0.5vh 1.5vw;
     background-color: #eb6123;
     color: rgb(117, 9, 194);
     border: none;
@@ -166,7 +186,54 @@ h2 {
     cursor: pointer;
     font-family: 'Eater', cursive;
     font-size: 3vmin;
-    margin-top: 1vh;
+    margin-top: 0.5vh;
+}
+
+.nav-button {
+    display: inline-block;
+    padding: 0.5vh 1.5vw;
+    background-color: #eb6123;
+    color: rgb(117, 9, 194);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Eater', cursive;
+    font-size: 3vmin;
+    margin-top: 0.5vh;
+    text-shadow: 
+        2px 2px 4px rgba(0,0,0,0.5),
+        -2px -2px 0 #49ee07,
+        2px -2px 0 #49ee07,
+        -2px 2px 0 #49ee07,
+        2px 2px 0 #49ee07,
+        -3px 0 0 #49ee07,
+        3px 0 0 #49ee07,
+        0 -3px 0 #49ee07,
+        0 3px 0 #49ee07;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add this line for box shadow */
+    transition: box-shadow 0.3s ease; /* Optional: adds a smooth transition effect */
+}
+
+.nav-button:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+}
+
+.nav-button.active {
+    background-color: #49ee07;
+    color: #eb6123;
+    text-shadow: 
+        2px 2px 4px rgba(0,0,0,0.5),
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000,
+        -3px 0 0 #000,
+        3px 0 0 #000,
+        0 -3px 0 #000,
+        0 3px 0 #000;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
 }
 
 @keyframes cauldronRumbleAndScale {
@@ -191,23 +258,80 @@ h2 {
     display: none;
     height: 100%;
     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .active {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    padding-top: 1vh;
+}
+
+#homePage {
+    justify-content: flex-start;
+}
+
+#aboutPage, #contactPage {
+    overflow: hidden;
+    padding: 1vh;
+}
+
+#aboutPage .content, #contactPage .content {
+    max-width: 80vw;
+    margin: 0 auto;
+}
+
+#aboutPage .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#aboutPage h2, #contactPage h2 {
+    margin-bottom: 1vh;
+}
+
+#contactPage h2 {
+    font-size: 8vmin;
+}
+
+#aboutPage h2 {
+    font-size: 8vmin;
+}
+
+#aboutPage p {
+    color: #eb6123;
+    font-size: 5vmin;
+    line-height: 1.4;
+    text-shadow: 1px 1px 2px #000;
+    margin-left: 0.2vw ;
+    margin-right: 0.2vw;
+    margin-bottom: 0.2vh;
+    width: 100vw;
+    text-shadow: 
+        2px 2px 4px #000,
+        -2px -2px 0 rgb(117, 9, 194),
+        2px -2px 0 rgb(117, 9, 194),
+        -2px 2px 0 rgb(117, 9, 194),
+        2px 2px 0 rgb(117, 9, 194),
+        -3px 0 0 rgb(117, 9, 194),
+        3px 0 0 rgb(117, 9, 194),
+        0 -3px 0 rgb(117, 9, 194),
+        0 3px 0 rgb(117, 9, 194);
 }
 
 #responseText {
-    font-size: 8vmin;
+    font-size: 6vmin;
     margin: 1vh 0;
     color: rgb(117, 9, 194);   
     text-shadow: 
-        /* Lime green glow */
         2px 2px 4px rgba(0,0,0,0.5),
-        /* Thicker text border */
         -2px -2px 0 #49ee07,
         2px -2px 0 #49ee07,
         -2px 2px 0 #49ee07,
@@ -216,4 +340,92 @@ h2 {
         3px 0 0 #49ee07,
         0 -3px 0 #49ee07,
         0 3px 0 #49ee07;
+}
+
+#contactForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 50%;
+    max-width: 80vw;
+    margin: 2vh auto;
+}
+
+#contactForm input {
+    width: 60%;
+    padding: 2.5vh;
+    text-align: center;
+    margin-bottom: 0.5vh;
+    box-sizing: border-box;
+    border: 1.5px solid #eb6123;
+    border-radius: 10px;
+    font-family: 'Eater', cursive;
+    background-color: rgba(117, 9, 194, 0.5);
+    color: #49ee07;
+    font-size: 2.5vmin;
+}
+
+#contactForm input::placeholder {
+    color: #49ee07;
+}
+
+#contactForm button {
+    margin-top: 2vh;
+}
+
+/* Responsive adjustments */
+@media (max-aspect-ratio: 1/1) {
+    h1 {
+        font-size: 7vmin;
+    }
+    
+    h2, #submitButton, #returnButton, .nav-button, #contactForm button {
+        font-size: 3vmin;
+    }
+    
+    #questionInput, #contactForm input, #aboutPage p {
+        font-size: 2.5vmin;
+    }
+
+    #cauldronImage {
+        width: 40vmin;
+    }
+}
+
+@media (max-aspect-ratio: 3/4) {
+    #cauldronImage {
+        width: 50vmin;
+    }
+
+    h2 {
+        font-size: 3.5vmin;
+    }
+
+    #questionInput, #submitButton {
+        font-size: 3vmin;
+    }
+
+    #contactForm input {
+        width: 80%;
+    }
+}
+/* Custom cursor for clickable elements */
+#submitButton, #returnButton, .nav-button, #contactForm button {
+    cursor: url('../media/Ghost Cursor.png'), auto;
+}
+
+/* Custom cursor for clickable elements when active (being clicked) */
+#submitButton:active, #returnButton:active, .nav-button:active, #contactForm button:active {
+    cursor: url('../media/Ghost Click.png'), auto;
+}
+
+/* You might want to add this to other clickable elements as well, such as form inputs */
+#questionInput, #contactForm input {
+    cursor: url('../media/Ghost Cursor.png'), auto;
+}
+
+#questionInput:focus, #contactForm input:focus {
+    cursor: text;
 }

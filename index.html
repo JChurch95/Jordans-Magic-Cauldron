@@ -14,10 +14,21 @@
             <source src="./media/Pumpkins Bats Animation.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-        <div class="content">
+        
+        <header>
             <h1>Jordan's Magic Cauldron</h1>
-            <img id="cauldronImage" src="./media/Magic Cauldron.png" alt="Magic Cauldron Image">
-            <div id="questionPage" class="page active">
+            <nav>
+                <div class="nav-buttons-container">
+                    <button class="nav-button" data-page="homePage">Home</button>
+                    <button class="nav-button" data-page="aboutPage">About</button>
+                    <button class="nav-button" data-page="contactPage">Contact</button>
+                </div>
+            </nav>
+        </header>
+        
+        <div class="content">
+            <div id="homePage" class="page active">
+                <img id="cauldronImage" src="./media/Magic Cauldron.png" alt="Magic Cauldron Image">
                 <h2>Seek your reply, the Magic Cauldron can't deny!</h2>
                 <form id="questionForm">
                     <div class="input-wrapper">
@@ -25,10 +36,24 @@
                     </div>
                     <button type="submit" id="submitButton">Cook up an answer!</button>
                 </form>
-            </div>
-            <div id="responsePage" class="page">
                 <div id="responseText"></div>
-                <button id="returnButton">Ask Another Question</button>
+                <button id="returnButton" style="display: none;">Ask Another Question</button>
+            </div>
+            
+            <div id="aboutPage" class="page">
+                <h2>The Cauldron knows all...</h2>
+                <p>Welcome to Jordan's Magic Cauldron, where mystical answers bubble forth from the depths of my enchanted brew. Whether you seek guidance, entertainment, or just a touch of magic in your day, my cauldron is ready to serve up the answers you seek!</p>
+                <p>Remember, the magic is in the interpretation - use my answers wisely and always with a pinch of humor!</p>
+            </div>
+            
+            <div id="contactPage" class="page">
+                <h2>Contact Me!</h2>
+                <form id="contactForm">
+                    <input type="text" id="firstName" placeholder="First Name" required>
+                    <input type="text" id="lastName" placeholder="Last Name" required>
+                    <input type="email" id="email" placeholder="Email" required>
+                    <button type="submit">Send an Owl</button>
+                </form>
             </div>
         </div>
     </div>
@@ -37,7 +62,10 @@
         <source src="./media/cauldron-bubbling.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
-    
+    <audio id="batsFlyingSound" loop>
+        <source src="./media/Bats Flying Sound.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
     <script src="./js/script.js"></script>
 </body>
 </html>

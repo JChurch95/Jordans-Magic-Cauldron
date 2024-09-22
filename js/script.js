@@ -1,15 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
     var content = document.querySelector('.content');
     var cauldronSound = document.getElementById('cauldronSound');
+    var batsFlyingSound = document.getElementById('batsFlyingSound');
     var questionForm = document.getElementById('questionForm');
     var bgVideo = document.getElementById('bgVideo');
     var submitButton = document.getElementById('submitButton');
-    var questionPage = document.getElementById('questionPage');
-    var responsePage = document.getElementById('responsePage');
     var responseText = document.getElementById('responseText');
     var returnButton = document.getElementById('returnButton');
     var cauldronImage = document.getElementById('cauldronImage');
     var questionInput = document.getElementById('questionInput');
+    var navButtons = document.querySelectorAll('.nav-button');
+    var contactForm = document.getElementById('contactForm');
+    var promptText = document.querySelector('h2');
+
+    // Add this new variable to track if it's the first question
+    var isFirstQuestion = true;
 
     // Magic 8 Ball responses
     var responses = [
@@ -35,13 +40,25 @@ document.addEventListener('DOMContentLoaded', function() {
         "Very doubtful."
     ];
 
+    // Modify the getRandomResponse function
     function getRandomResponse() {
+        if (isFirstQuestion) {
+            isFirstQuestion = false; // Set to false for subsequent questions
+            // Return a "no" answer for the first question
+            return responses.find(response => response.toLowerCase().includes("no"));
+        }
         return responses[Math.floor(Math.random() * responses.length)];
     }
 
-    function switchPage(fromPage, toPage) {
-        fromPage.classList.remove('active');
-        toPage.classList.add('active');
+    function switchPage(toPage) {
+        document.querySelector('.page.active').classList.remove('active');
+        document.getElementById(toPage).classList.add('active');
+        
+        // Remove 'active' class from all nav buttons
+        navButtons.forEach(button => button.classList.remove('active'));
+        
+        // Add 'active' class to the clicked button
+        document.querySelector(`[data-page="${toPage}"]`).classList.add('active');
     }
 
     function adjustTextareaHeight(textarea) {
@@ -61,9 +78,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial adjustment
     adjustTextareaHeight(questionInput);
 
+    navButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            switchPage(this.dataset.page);
+        });
+    });
+
     questionForm.addEventListener('submit', function(e) {
         e.preventDefault(); // Prevent form submission
 
+        promptText.style.display = 'none'; // Hide the prompt text
         cauldronImage.classList.add('cauldron-rumbling');
         submitButton.disabled = true; // Disable the button during animation
 
@@ -81,34 +105,60 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Start playing the looping cauldron sound
-        cauldronSound.currentTime = 0; // Reset the audio to the beginning
-        var audioPromise = cauldronSound.play();
+        // Start playing both the cauldron and bats flying sounds
+        cauldronSound.currentTime = 0; // Reset the cauldron audio to the beginning
+        batsFlyingSound.currentTime = 0; // Reset the bats flying sound to the beginning
+        var cauldronAudioPromise = cauldronSound.play();
+        var batsAudioPromise = batsFlyingSound.play();
 
-        if (audioPromise !== undefined) {
-            audioPromise.then(_ => {
-                // Audio playback started successfully
-            })
-            .catch(error => {
-                console.log("Audio play failed:", error);
-            });
-        }
+        [cauldronAudioPromise, batsAudioPromise].forEach(promise => {
+            if (promise !== undefined) {
+                promise.then(_ => {
+                    // Audio playback started successfully
+                })
+                .catch(error => {
+                    console.log("Audio play failed:", error);
+                });
+            }
+        });
 
-        // Stop animation, hide video, and stop sound after 10.15 seconds
+        // Stop animation, hide video, and stop sounds after 10.15 seconds
         setTimeout(function() {
             cauldronImage.classList.remove('cauldron-rumbling');
             bgVideo.style.display = 'none';
             bgVideo.pause();
-            cauldronSound.pause(); // Stop the looping sound
+            cauldronSound.pause(); // Stop the cauldron sound
+            batsFlyingSound.pause(); // Stop the bats flying sound
             submitButton.disabled = false; // Re-enable the button
             responseText.textContent = getRandomResponse(); // Set response text
-            switchPage(questionPage, responsePage);
+            responseText.style.display = 'block';
+            returnButton.style.display = 'block';
+            questionForm.style.display = 'none';
         }, 10150); // 10.15 seconds duration
     });
 
     returnButton.addEventListener('click', function() {
-        switchPage(responsePage, questionPage);
+        responseText.style.display = 'none';
+        returnButton.style.display = 'none';
+        questionForm.style.display = 'block';
+        promptText.style.display = 'block'; // Show the prompt text again
         questionInput.value = ''; // Clear the input
         adjustTextareaHeight(questionInput); // Reset the height of the textarea
+    });
+
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var firstName = document.getElementById('firstName').value;
+        var lastName = document.getElementById('lastName').value;
+        var email = document.getElementById('email').value;
+        
+        // Here you would typically send this data to a server
+        console.log('Owl Sent!:', { firstName, lastName, email });
+        
+        // Clear the form
+        contactForm.reset();
+        
+        // Show a thank you message (you can customize this)
+        alert('Thank you for contacting me!');
     });
 });
