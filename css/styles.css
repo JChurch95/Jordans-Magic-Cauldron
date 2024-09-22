@@ -96,7 +96,7 @@ nav {
 .nav-buttons-container {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Adjust this value to control spacing between buttons */
+    gap: 10px;
 }
 
 .content {
@@ -107,11 +107,11 @@ nav {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: calc(100% - 15vh); /* Adjust based on header height */
+    height: calc(100% - 15vh);
     width: 100%;
     padding: 0 2vw;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow-y: auto; /* Allow vertical scrolling if content exceeds viewport */
 }
 
 h1, h2, #submitButton, #returnButton, .nav-button, #contactForm button {
@@ -210,8 +210,8 @@ h2 {
         3px 0 0 #49ee07,
         0 -3px 0 #49ee07,
         0 3px 0 #49ee07;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add this line for box shadow */
-    transition: box-shadow 0.3s ease; /* Optional: adds a smooth transition effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease;
 }
 
 .nav-button:hover {
@@ -316,14 +316,14 @@ h2 {
     width: 100vw;
     text-shadow: 
         2px 2px 4px #000,
-        -2px -2px 0 rgb(117, 9, 194),
-        2px -2px 0 rgb(117, 9, 194),
-        -2px 2px 0 rgb(117, 9, 194),
-        2px 2px 0 rgb(117, 9, 194),
-        -3px 0 0 rgb(117, 9, 194),
-        3px 0 0 rgb(117, 9, 194),
-        0 -3px 0 rgb(117, 9, 194),
-        0 3px 0 rgb(117, 9, 194);
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000,
+        -3px 0 0 #000,
+        3px 0 0 #000,
+        0 -3px 0 #000,
+        0 3px 0 #000;
 }
 
 #responseText {
@@ -411,6 +411,47 @@ h2 {
         width: 80%;
     }
 }
+
+/* New responsive adjustments */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+
+    #cauldronImage {
+        width: 40vmin;
+        height: auto;
+    }
+
+    #questionForm {
+        width: 90%;
+    }
+
+    #questionInput {
+        width: 100%;
+    }
+
+    .nav-buttons-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-button {
+        margin: 5px 0;
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    #contactForm {
+        width: 90%;
+    }
+
+    #contactForm input {
+        width: 100%;
+    }
+}
+
 /* Custom cursor for clickable elements */
 #submitButton, #returnButton, .nav-button, #contactForm button {
     cursor: url('../media/Ghost Cursor.png'), auto;
